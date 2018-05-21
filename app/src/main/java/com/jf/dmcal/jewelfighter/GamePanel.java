@@ -2,7 +2,6 @@ package com.jf.dmcal.jewelfighter;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.annotation.MainThread;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -12,12 +11,12 @@ import android.view.SurfaceView;
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
-    private MainThread Thread;
+    private MainThread thread;
 
     public GamePanel(Context context){
         super(context);
         getHolder().addCallback(this);
-        thread = new MainThread(...);
+        thread = new MainThread(getHolder(),this);
         setFocusable(true);
     }
 
@@ -30,7 +29,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceCreated(SurfaceHolder holder){
         thread = new MainThread(getHolder(), this);
         thread.setRunning(true);
-        threadt.start;
+        thread.start();
     }
 
     @Override
@@ -38,7 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         boolean retry = true;
         while(true){
             try {
-                thread.SetRunning(false);
+                thread.setRunning(false);
                 thread.join();
             }
             catch(Exception e) {
@@ -52,7 +51,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         return super.onTouchEvent(event);
     }
 
-    public void update(){}
+    public void update(){
+        1 + 1
+    }
 
     @Override
     public void draw(Canvas canvas){
